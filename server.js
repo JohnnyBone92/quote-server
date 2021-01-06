@@ -40,7 +40,6 @@ app.post('/api/quotes', (req, res, next) => {
 
 app.put('/api/quotes', (req, res, next) => {
     if (req.query.quote && req.query.person) {
-        console.log(req.query.quote + ' ' + req.query.person + ' ' + req.query.id)
         quotes.forEach(quote => {
             if (quote.id == req.query.id) {
                 quote.quote = req.query.quote
