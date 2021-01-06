@@ -53,7 +53,7 @@ button:hover {
   transition: background-color 0.2s;
 }
 
-#quote-container {
+#quote-container, #message {
   padding: 10px;
   width: 60%;
 }

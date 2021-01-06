@@ -1,7 +1,7 @@
 const submitButton = document.getElementById('submit-quote');
 const deleteButton = document.getElementById('delete-quote')
 const textArea = document.getElementById('quote-text')
-const quoteContainer = document.getElementById('quote-container');
+const message = document.getElementById('message');
 const person = document.getElementById('person');
 const prevButton = document.getElementById('prev')
 const nextButton = document.getElementById('next')
@@ -10,28 +10,30 @@ let quotes = []
 let quoteIndex = 0;
 
 const resetQuotes = () => {
-    quoteContainer.innerHTML = '';
+    message.innerHTML = '';
 }
 
 const renderQuote = () => {
     resetQuotes();
     if (quotes.length === 0) {
-        textArea.innerHTML = ''
+        textArea.value = ''
         person.value = ''
+        deleteButton.disabled = true
+        submitButton.disabled = true
         const updatedQuote = document.createElement('div');
         updatedQuote.innerHTML = `
         <h3>There are no more quotes left.</h3>
         <p>Go to the <a href="add-quote.html">Add Quote page</a> to send new quotes.</p>
         `
-        quoteContainer.appendChild(updatedQuote);
+        message.appendChild(updatedQuote);
     } else {
-        textArea.innerHTML = quotes[quoteIndex].quote
+        textArea.value = quotes[quoteIndex].quote
         person.value = quotes[quoteIndex].person
     }
 }
 
 const renderError = response => {
-    quoteContainer.innerHTML = `<p>Your request returned an error from the server: </p>
+    message.innerHTML = `<p>Your request returned an error from the server: </p>
   <p>Code: ${response.status}</p>
   <p>${response.statusText}</p>`;
 }
@@ -75,6 +77,7 @@ submitButton.addEventListener('click', () => {
     .then(({quote}) => {
         quotes[quoteIndex].quote = quote.quote
         quotes[quoteIndex].person = quote.person
+        renderQuote()
         const updatedQuote = document.createElement('div');
         updatedQuote.innerHTML = `
         <h3>Congrats, your quote was updated!</h3>
@@ -82,7 +85,8 @@ submitButton.addEventListener('click', () => {
         <div class="attribution">- ${quote.person}</div>
         <p>Go to the <a href="index.html">home page</a> to request and view all quotes.</p>
         `
-        quoteContainer.appendChild(updatedQuote);
+        resetQuotes()
+        message.appendChild(updatedQuote);
     });
 });
 
@@ -104,6 +108,7 @@ deleteButton.addEventListener('click', () => {
         <h3>The quote was deleted successfully!</h3>
         <p>Go to the <a href="index.html">home page</a> to request and view all quotes.</p>
         `
-        quoteContainer.appendChild(updatedQuote);
+        resetQuotes()
+        message.appendChild(updatedQuote);
     })
 });
