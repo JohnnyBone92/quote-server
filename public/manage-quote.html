@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Quote API</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <h1>Quote API</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="add-quote.html">Add a New Quote</a>
+    <a href="manage-quote.html">Update or delete Quotes</a>
+  </nav>
+  <h2>Update or delete quotes</h2>
+  <div class="inputs">
+    <label for="">Quote text:</label>
+    <textarea id="quote-text" name="quote" rows="4" cols="50"></textarea>
+    <label for="person">Person:</label>
+    <input id="person" value="">
+  </div>
+  <div class="buttons">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+    <button id="submit-quote">Update quote</button>
+    <button id="delete-quote">Delete quote</button>
+  </div>
+  <div id="quote-container">
+
+  </div>
+  <script src="manage-quotes.js"></script>
+</body>
+</html>
